@@ -1,3 +1,6 @@
+import React from 'react'
+import { cn } from '@/lib/utils'
+
 function Container({
   children,
   className,
