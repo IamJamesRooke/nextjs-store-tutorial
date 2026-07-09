@@ -1,31 +1,3 @@
-### Deploy On Vercel
-
-- create vercel account
-  [Vercel](https://vercel.com)
-- create github repository
-- double check .gitignore
-- update package.json
-
-```json
-"scripts": {
-    "dev": "next dev",
-    "build": "npx prisma generate && next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-```
-
-- push it up to github
-
-```bash
-git init
-git add .
-git commit -m "first commit"
-```
-
-- deploy on vercel
-- setup env variables
-
 ### Toast Component
 
 [Toast](https://ui.shadcn.com/docs/components/toast)
