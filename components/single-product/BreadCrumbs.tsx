@@ -11,26 +11,23 @@ function BreadCrumbs({ name }: { name: string }) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
-        
-        {/* ROOT */}
         <BreadcrumbItem>
-          <BreadcrumbLink href="/" className="capitalize text-lg">
+          <BreadcrumbLink href='/' className='capitalize text-lg'>
             home
           </BreadcrumbLink>
         </BreadcrumbItem>
-        
-        {/* PRODUCTS */}
+
+        <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="/products" className="capitalize text-lg">
-            home
+          <BreadcrumbLink href='/products' className='capitalize text-lg'>
+            products
           </BreadcrumbLink>
         </BreadcrumbItem>
-        
-        {/* SINGLE PRODUCT */}
+
+        <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage className="capitalize text-lg">{name}</BreadcrumbPage>
+          <BreadcrumbPage className='capitalize text-lg'>{name}</BreadcrumbPage>
         </BreadcrumbItem>
-        
       </BreadcrumbList>
     </Breadcrumb>
   );

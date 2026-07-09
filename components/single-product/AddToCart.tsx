@@ -9,3 +9,11 @@ function AddToCart({productId}:{productId:string}) {
 }
 
 export default AddToCart
+
+
+
+
+
+
+
+
