@@ -1,9 +1,15 @@
-import React from 'react'
+import ProductsContainer from '@/components/products/ProductsContainer';
 
-function Products() {
+async function ProductsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ layout?: string; search?: string }>;
+}) {
+  const { layout = 'grid', search = '' } = await searchParams;
   return (
-    <div>products</div>
-  )
+    <>
+      <ProductsContainer layout={layout} search={search} />
+    </>
+  );
 }
-
-export default Products
+export default ProductsPage;
