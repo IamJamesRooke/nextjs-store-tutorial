@@ -1,3 +1,4 @@
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import Container from "../global/Container";
 import CartButton from "./CartButton";
 import Logo from "./Logo";
@@ -15,6 +16,13 @@ function Navbar() {
           <NavSearch />
         </Suspense>
         <div className="flex gap-4 items-center">
+          <Show when="signed-out">
+            <SignInButton />
+            <SignUpButton />
+          </Show>
+          <Show when="signed-in">
+            <UserButton />
+          </Show>
           <CartButton />
           <DarkMode />
           <LinksDropdown />

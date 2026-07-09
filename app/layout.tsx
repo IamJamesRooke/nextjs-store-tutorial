@@ -1,3 +1,5 @@
+import {ClerkProvider} from "@clerk/nextjs";
+import { shadcn } from "@clerk/ui/themes";
 import type { Metadata } from "next";
 import { Outfit, Raleway } from "next/font/google";
 import "./globals.css";
@@ -28,10 +30,12 @@ export default function RootLayout({
       className={outfit.className}
     >
       <body className="min-h-full flex flex-col">
-        <Providers>
+        <ClerkProvider appearance={{ theme: shadcn }}>
+          <Providers>
           <Navbar />
           <Container className="py-20">{children}</Container>
-        </Providers>
+          </Providers>
+        </ClerkProvider>
       </body>
     </html>
   );

@@ -1,11 +1,7 @@
-import React from 'react'
+import { UserButton } from "@clerk/nextjs";
 
 function UserIcon() {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <UserButton />;
 }
 
-export default UserIcon
+export default UserIcon;
