@@ -1,3 +1,5 @@
+'use server'
+
 import db from "@/utils/db";
 import { redirect } from "next/navigation";
 
@@ -10,8 +12,8 @@ export const fetchFeaturedProducts = async () => {
   return products;
 };
 
-export const fetchAllProducts = ({ search = "" }: { search?: string } = {}) => {
-  return db.product.findMany({
+export const fetchAllProducts = async ({ search = "" }: { search?: string } = {}) => {
+  const products = await db.product.findMany({
     where: {
       OR: [
         { name: { contains: search, mode: "insensitive" } },
@@ -22,6 +24,7 @@ export const fetchAllProducts = ({ search = "" }: { search?: string } = {}) => {
       createdAt: "desc",
     },
   });
+  return products;
 };
 
 export const fetchSingleProduct = async (productId: string) => {
@@ -33,3 +36,7 @@ export const fetchSingleProduct = async (productId: string) => {
   if (!product) redirect("/products");
   return product;
 };
+
+export const createProductAction = async(prevState:any, formData:FormData):Promise<{message:string}> => {
+  return {message: 'product created'}
+}
