@@ -14,6 +14,7 @@ async function SingleProductPage({
   const { id } = await params;
   const product = await fetchSingleProduct(id);
   const { name, image, company, description, price } = product;
+  const imagePath = image.startsWith('/') || image.startsWith('http') ? image : `/${image}`;
   const dollarsAmount = formatCurrency(price);
   return (
     <section>
@@ -22,7 +23,7 @@ async function SingleProductPage({
         {/* IMAGE FIRST COL */}
         <div className='relative h-full'>
           <Image
-            src={image}
+            src={imagePath}
             alt={name}
             fill
             sizes='(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw'

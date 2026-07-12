@@ -10,6 +10,7 @@ function ProductsGrid({ products }: { products: Product[] }) {
     <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
       {products.map((product) => {
         const { name, price, image } = product;
+        const imagePath = image.startsWith('/') || image.startsWith('http') ? image : `/${image}`;
         const productId = product.id;
         const dollarsAmount = formatCurrency(price);
         return (
@@ -19,7 +20,7 @@ function ProductsGrid({ products }: { products: Product[] }) {
                 <CardContent className='p-4'>
                   <div className='relative h-64 md:h-48 rounded overflow-hidden '>
                     <Image
-                      src={image}
+                      src={imagePath}
                       alt={name}
                       fill
                       sizes='(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw'
