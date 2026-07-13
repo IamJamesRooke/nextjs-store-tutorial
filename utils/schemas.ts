@@ -10,7 +10,7 @@ export const productSchema = z.object({
       message: "name must be less than 100 characters.",
     }),
   company: z.string(),
-  featured: z.coerce.boolean(),
+  featured: z.coerce.boolean().default(false),
   price: z.coerce.number().int().min(0, {
     message: "price must be a positive number.",
   }),
@@ -37,9 +37,9 @@ function validateImageFile() {
     .refine((file) => {
       return !file || file.size <= maxUploadSize;
     }, "File must be less than 1 MB")
-    .refine(() => {
+    .refine((file) => {
       return (
-        !file || acceptedFileTypes.some((type) => file.type.startWith(type))
+        !file || acceptedFileTypes.some((type) => file.type.startsWith(type))
       );
     }, "File must be an image.");
 }
@@ -50,7 +50,7 @@ export function validateWithZodSchema<T>(
 ): T {
   const result = schema.safeParse(data);
   if (!result.success) {
-    const errors = result.error.errors.map((error) => error.message);
+    const errors = result.error.issues.map((error) => error.message);
     throw new Error(errors.join(", "));
   }
   return result.data;
