@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Rating from "./Rating";
 import Comment from "./Comment";
 import Image from "next/image";
+import type { ReactNode } from "react";
 
 type ReviewCardProps = {
   reviewInfo: {
@@ -10,10 +11,10 @@ type ReviewCardProps = {
     name: string;
     image: string;
   };
-  children?: React.ReactNode;
+  children?: ReactNode;
 };
 
-function ReviewCard({ reviewInfo, children }: { ReviewCardProps }) {
+function ReviewCard({ reviewInfo, children }: ReviewCardProps) {
   return (
     <Card className="relative">
       <CardHeader>
