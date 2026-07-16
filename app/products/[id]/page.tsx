@@ -5,20 +5,14 @@ import { formatCurrency } from "@/utils/format";
 import FavoriteToggleButton from "@/components/products/FavoriteToggleButton";
 import AddToCart from "@/components/single-product/AddToCart";
 import ProductRating from "@/components/single-product/ProductRating";
-import ShareButton from "@/components/single-product/ShareButton";
-import SubmitReview from "@/components/reviews/SubmitReview";
-import ProductReviews from "@/components/reviews/ProductReviews";
+import SubmitReview from '@/components/reviews/SubmitReview';
+import ProductReviews from '@/components/reviews/ProductReviews';
 
-async function SingleProductPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+
+async function SingleProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const product = await fetchSingleProduct(id);
   const { name, image, company, description, price } = product;
-  const imagePath =
-    image.startsWith("/") || image.startsWith("http") ? image : `/${image}`;
   const dollarsAmount = formatCurrency(price);
   return (
     <section>
@@ -27,7 +21,7 @@ async function SingleProductPage({
         {/* IMAGE FIRST COL */}
         <div className="relative h-full">
           <Image
-            src={imagePath}
+            src={image}
             alt={name}
             fill
             sizes="(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw"
@@ -39,10 +33,7 @@ async function SingleProductPage({
         <div>
           <div className="flex gap-x-8 items-center">
             <h1 className="capitalize text-3xl font-bold">{name}</h1>
-            <div className="flex items-center gap-x-2">
-              <FavoriteToggleButton productId={id} />
-              <ShareButton name={product.name} productId={params.id} />
-            </div>
+            <FavoriteToggleButton productId={id} />
           </div>
           <ProductRating productId={id} />
           <h4 className="text-xl mt-2">{company}</h4>
@@ -52,9 +43,9 @@ async function SingleProductPage({
           <p className="mt-6 leading-8 text-muted-foreground">{description}</p>
           <AddToCart productId={id} />
         </div>
+        <ProductReviews productId={id} />
+        <SubmitReview productId={id} />
       </div>
-      <ProductReviews productId={params.id}/>
-      <SubmitReview productId={params.id}/>
     </section>
   );
 }

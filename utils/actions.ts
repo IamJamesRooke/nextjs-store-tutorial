@@ -63,7 +63,9 @@ export const fetchSingleProduct = async (productId: string) => {
       id: productId,
     },
   });
-  if (!product) redirect("/products");
+  if (!product) {
+    redirect('/products');
+  }
   return product;
 };
 
@@ -291,7 +293,7 @@ export const fetchProductRating = async (productId: string) => {
     where: { productId },
   });
   return {
-    rating: result[0]?._avg.rating?.roFixed(1) ?? 0,
+    rating: result[0]?._avg.rating?.toFixed(1) ?? 0,
     count: result[0]?._count ?? 0,
   }
 };
