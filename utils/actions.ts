@@ -365,7 +365,7 @@ const updateOrCreateCartItem = async () => {};
 
 export const updateCart = async () => {};
 
-export const addToCartAction = async () => {};
+export const addToCartAction = async (prevState:any, formData:FormData) => {};
 
 export const removeCartItemAction = async () => {};
 
