@@ -575,21 +575,27 @@ export const createOrderAction = async (prevState: any, formData: FormData) => {
       },
     });
 
+    const { currentCart } = await updateCart(cart);
+
     const order = await db.order.create({
       data: {
         clerkId: user.id,
-        products: cart.numItemsInCart,
-        orderTotal: cart.orderTotal,
-        tax: cart.tax,
-        shipping: cart.shipping,
+        products: currentCart.numItemsInCart,
+        orderTotal: currentCart.orderTotal,
+        tax: currentCart.tax,
+        shipping: currentCart.shipping,
         email: user.emailAddresses[0].emailAddress,
+        isPaid: false,
       },
     });
     orderId = order.id;
+    redirect(`/checkout?orderId=${orderId}&cartId=${cartId}`);
   } catch (error) {
-    renderError(error);
+    if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+      throw error;
+    }
+    return renderError(error);
   }
-  redirect(`/checkout?orderId=${orderId}&cartId=${cartId}`)
 };
 
 export const fetchUserOrders = async () => {
