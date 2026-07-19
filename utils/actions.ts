@@ -577,6 +577,7 @@ export const createOrderAction = async (prevState: any, formData: FormData) => {
         id: cart.id,
       },
     });
+    revalidatePath('/');
   } catch (error) {
     renderError(error);
   }
